@@ -123,7 +123,7 @@ Backend berjalan menggunakan port 3000 agar API dapat menerima permintaan dari a
 
 **Bukti backend aktif:**
 
-![Backend Aktif](bukti/06-backend-aktif.png)
+![Backend Aktif](bukti/06-backend-aktif.PNG)
 
 ### 3.8 Melakukan Health Check
 
