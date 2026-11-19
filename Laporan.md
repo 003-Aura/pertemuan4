@@ -43,7 +43,7 @@ Hasil instalasi menunjukkan bahwa sebanyak 128 package berhasil ditambahkan dan 
 
 **Bukti instalasi package:**
 
-![Hasil Instalasi Package](bukti/01-install-package..png)
+![Hasil Instalasi Package](bukti/01-install-package..PNG)
 
 ### 3.3 Menjalankan Database MySQL
 
@@ -57,7 +57,7 @@ Setelah perintah dijalankan, dilakukan pemeriksaan untuk memastikan container da
 
 **Bukti database MySQL berjalan:**
 
-![Database MySQL Berjalan](bukti/02-database-mysql.png)
+![Database MySQL Berjalan](bukti/02-database-mysql.PNG)
 
 ### 3.4 Menjalankan Prisma Generate
 
@@ -73,7 +73,7 @@ Apabila proses berhasil, Prisma Client dapat digunakan oleh aplikasi backend unt
 
 **Bukti Prisma Generate:**
 
-![Prisma Generate Berhasil](bukti/03-prisma-generate.png)
+![Prisma Generate Berhasil](bukti/03-prisma-generate.PNG)
 
 ### 3.5 Menjalankan Migrasi Database
 
@@ -89,7 +89,7 @@ npm run db:deploy
 
 **Bukti migrasi database:**
 
-![Migrasi Database Berhasil](bukti/04-migrasi-database.png)
+![Migrasi Database Berhasil](bukti/04-migrasi-database.PNG)
 
 ### 3.6 Memasukkan Data Awal Menggunakan Seed
 
@@ -107,7 +107,7 @@ Setelah proses selesai, dilakukan pemeriksaan untuk memastikan data awal berhasi
 
 **Bukti proses seed:**
 
-![Seed Database Berhasil](bukti/05-seed-database.png)
+![Seed Database Berhasil](bukti/05-seed-database.PNG)
 
 ### 3.7 Menjalankan Backend
 
@@ -147,7 +147,7 @@ Hasil tersebut menunjukkan bahwa API berjalan dengan baik dan dapat memberikan r
 
 **Bukti health check:**
 
-![Hasil Health Check](bukti/07-health-check.png)
+![Hasil Health Check](bukti/07-health-check.PNG)
 
 ## 4. Penjelasan Source Code
 
@@ -200,7 +200,7 @@ Pengujian berhasil dilakukan dengan menjalankan perintah npm test. Hasil penguji
 
 **Bukti pengujian berhasil:**
 
-![Pengujian Berhasil](bukti/08-pengujian-berhasil.png)
+![Pengujian Berhasil](bukti/08-pengujian-berhasil.PNG)
 
 ### 6.2 Pengujian Gagal
 
@@ -208,7 +208,7 @@ Pengujian gagal dilakukan dengan memberikan input yang tidak sesuai atau kondisi
 
 **Bukti pengujian gagal:**
 
-![Pengujian Gagal](bukti/09-pengujian-gagal.png)
+![Pengujian Gagal](bukti/09-pengujian-gagal.PNG)
 
 ### 6.3 Ringkasan Hasil Pengujian
 
