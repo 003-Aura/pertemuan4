@@ -47,12 +47,10 @@ Hasil instalasi menunjukkan bahwa sebanyak 128 package berhasil ditambahkan dan 
 
 ### 3.3 Menjalankan Database MySQL
 
-Database MySQL digunakan sebagai tempat penyimpanan data aplikasi. Pada praktikum ini, database dijalankan menggunakan Docker Compose sesuai petunjuk pada README paket backend.
-
-Perintah yang digunakan disesuaikan dengan konfigurasi Docker Compose yang tersedia pada project.
+Pada praktikum ini, database dijalankan menggunakan MariaDB melalui XAMPP sebagai alternatif karena Docker Compose tidak dapat digunakan. Database berjalan pada port 3306 dan digunakan oleh backend melalui Prisma ORM.
 
 ```bash
-[TULISKAN PERINTAH SESUAI README]
+# Menjalankan database melalui XAMPP Control Panel
 ```
 
 Setelah perintah dijalankan, dilakukan pemeriksaan untuk memastikan container database berhasil berjalan.
@@ -68,7 +66,7 @@ Prisma ORM digunakan untuk membantu backend berkomunikasi dengan database. Prose
 Perintah yang digunakan:
 
 ```bash
-[TULISKAN PERINTAH SESUAI README]
+npm run generate
 ```
 
 Apabila proses berhasil, Prisma Client dapat digunakan oleh aplikasi backend untuk melakukan operasi terhadap database.
@@ -86,7 +84,7 @@ Proses ini bertujuan agar tabel dan relasi yang dibutuhkan oleh aplikasi tersedi
 Perintah yang digunakan:
 
 ```bash
-[TULISKAN PERINTAH SESUAI README]
+npm run db:deploy
 ```
 
 **Bukti migrasi database:**
@@ -102,7 +100,7 @@ Data awal dapat berupa akun pengguna, jadwal kegiatan, dan contoh pendaftaran pe
 Perintah yang digunakan:
 
 ```bash
-[TULISKAN PERINTAH SESUAI README]
+npm run db:seed
 ```
 
 Setelah proses selesai, dilakukan pemeriksaan untuk memastikan data awal berhasil dimasukkan ke database.
@@ -181,14 +179,14 @@ File `server.js` digunakan untuk menjalankan server backend, menghubungkan aplik
 
 ## 5. Perubahan Kode
 
-Pada bagian ini dijelaskan perubahan kode yang dilakukan selama praktikum. Penjelasan mencakup lokasi file yang diubah, bagian kode yang mengalami perubahan, alasan perubahan, dan hasil setelah perubahan diterapkan.
+Pada praktikum ini tidak dilakukan perubahan pada source code backend yang disediakan dalam lampiran praktikum. Perubahan hanya dilakukan pada file konfigurasi .env, yaitu menyesuaikan alamat koneksi database agar dapat menggunakan MariaDB dari XAMPP.
 
 | Keterangan | Penjelasan |
 |---|---|
-| Lokasi file | [Isi sesuai file yang diubah] |
-| Bagian kode | [Isi bagian kode yang diubah] |
-| Alasan perubahan | [Jelaskan alasan perubahan] |
-| Hasil perubahan | [Jelaskan hasil setelah perubahan] |
+| Lokasi file | .env |
+| Bagian kode | Konfigurasi DATABASE_URL diubah menjadi mysql://root@localhost:3306/praktikum. |
+| Alasan perubahan | Menyesuaikan koneksi database dengan MariaDB XAMPP yang berjalan pada port 3306 karena Docker tidak dapat digunakan. |
+| Hasil perubahan | Backend berhasil terhubung dengan database, migrasi berhasil diterapkan, dan data awal berhasil dimasukkan menggunakan seed. |
 
 Apabila tidak melakukan perubahan kode, jelaskan bahwa source code masih menggunakan kode yang disediakan pada lampiran praktikum.
 
@@ -198,7 +196,7 @@ Pengujian dilakukan untuk mengetahui apakah aplikasi backend dapat menjalankan f
 
 ### 6.1 Pengujian Berhasil
 
-Pengujian berhasil dilakukan dengan memberikan input yang sesuai dengan ketentuan sistem. Sistem diharapkan dapat memproses permintaan dan memberikan respons sesuai dengan hasil yang diharapkan.
+Pengujian berhasil dilakukan dengan menjalankan perintah npm test. Hasil pengujian menunjukkan bahwa terdapat 4 pengujian yang berhasil, 0 pengujian gagal, dan 1 pengujian dilewati (skipped). Sistem dapat memproses permintaan sesuai dengan ketentuan yang telah ditentukan.
 
 **Bukti pengujian berhasil:**
 
@@ -206,7 +204,7 @@ Pengujian berhasil dilakukan dengan memberikan input yang sesuai dengan ketentua
 
 ### 6.2 Pengujian Gagal
 
-Pengujian gagal dilakukan dengan memberikan input yang tidak sesuai atau kondisi yang menyebabkan permintaan tidak dapat diproses. Pengujian ini bertujuan mengetahui bagaimana sistem menangani kesalahan dan memberikan respons kepada pengguna.
+Pengujian gagal dilakukan dengan memberikan input yang tidak sesuai atau kondisi yang menyebabkan permintaan tidak dapat diproses. Pengujian ini bertujuan mengetahui bagaimana sistem menangani kesalahan dan memberikan respons kepada pengguna.Pengujian dilakukan dengan mengakses endpoint `/api/v1/auth/me` tanpa menyertakan token autentikasi. Hasil pengujian menunjukkan bahwa sistem memberikan respons HTTP 401 Unauthorized dengan pesan "Silakan login". Hal ini menunjukkan bahwa sistem berhasil menolak permintaan dari pengguna yang belum melakukan autentikasi sehingga akses tetap terlindungi.
 
 **Bukti pengujian gagal:**
 
@@ -216,15 +214,15 @@ Pengujian gagal dilakukan dengan memberikan input yang tidak sesuai atau kondisi
 
 | No. | Skenario Pengujian | Hasil yang Diharapkan | Hasil Aktual |
 |---|---|---|---|
-| 1 | Instalasi package | Package berhasil dipasang | [Isi hasil] |
-| 2 | Menjalankan database | Database aktif | [Isi hasil] |
-| 3 | Prisma Generate | Prisma Client berhasil dibuat | [Isi hasil] |
-| 4 | Migrasi database | Struktur tabel berhasil diterapkan | [Isi hasil] |
-| 5 | Seed database | Data awal berhasil dimasukkan | [Isi hasil] |
-| 6 | Menjalankan backend | Backend aktif pada port 3000 | [Isi hasil] |
-| 7 | Health check | API memberikan respons HTTP 200 | [Isi hasil] |
-| 8 | Pengujian berhasil | Permintaan diproses sesuai ketentuan | [Isi hasil] |
-| 9 | Pengujian gagal | Sistem menangani kesalahan dengan baik | [Isi hasil] |
+| 1 | Instalasi package | Package berhasil dipasang | [Berhasil, sebanyak 128 package berhasil dipasang.] |
+| 2 | Menjalankan database | Database aktif | [Berhasil, MariaDB XAMPP versi 10.4.32 berjalan pada port 3306.] |
+| 3 | Prisma Generate | Prisma Client berhasil dibuat | [Berhasil, Prisma Client versi 6.19.3 berhasil dibuat.] |
+| 4 | Migrasi database | Struktur tabel berhasil diterapkan | [Berhasil, 1 migrasi berhasil diterapkan pada database praktikum] |
+| 5 | Seed database | Data awal berhasil dimasukkan | [Berhasil, 3 akun, 6 jadwal, dan contoh pendaftaran berhasil disiapkan.] |
+| 6 | Menjalankan backend | Backend aktif pada port 3000 | [Berhasil, API aktif pada port 3000.] |
+| 7 | Health check | API memberikan respons HTTP 200 | [Berhasil, API memberikan respons HTTP 200 OK dengan status ok.] |
+| 8 | Pengujian berhasil | Permintaan diproses sesuai ketentuan | [Berhasil, 4 pengujian lulus dan tidak ada pengujian yang gagal] |
+| 9 | Pengujian gagal | Sistem menangani kesalahan dengan baik | [Berhasil, sistem menolak akses tanpa login dengan respons HTTP 401 Unauthorized dan pesan Silakan login] |
 
 ## 7. Jawaban Pertanyaan Praktikum
 
@@ -236,11 +234,13 @@ Input fitur berasal dari pengguna melalui permintaan yang dikirimkan ke API. Per
 
 Perubahan data dilakukan oleh fungsi yang menjalankan proses penyimpanan, pembaruan, atau penghapusan data melalui Prisma Client. Setelah proses pengolahan data selesai, backend mengirimkan respons melalui API sehingga pengguna dapat mengetahui apakah permintaannya berhasil atau gagal.
 
-### 7.3 Apa yang terjadi jika permintaan gagal sebelum dan sesudah penyimpanan data?
+### 7.3 Apa yang terjadi jika request gagal pada titik sebelum penyimpanan dan sesudah penyimpanan? Gunakan satu fungsi konkret dari source di atas.
 
-Jika permintaan gagal sebelum proses penyimpanan dilakukan, data belum masuk ke database. Namun, apabila kegagalan terjadi setelah penyimpanan berhasil, terdapat kemungkinan data sudah tersimpan meskipun pengguna menerima respons gagal.
+Jika permintaan gagal sebelum proses penyimpanan dilakukan, data peserta belum masuk ke database. Contohnya pada fungsi `daftarPeserta()`, sistem terlebih dahulu memeriksa apakah jadwal tersedia, apakah mahasiswa sudah terdaftar, dan apakah kapasitas kelas masih mencukupi. Jika jadwal tidak ditemukan, mahasiswa sudah terdaftar, atau kelas penuh, proses pendaftaran akan ditolak dan data peserta tidak disimpan.
 
-Oleh karena itu, diperlukan penanganan kesalahan dan penggunaan transaksi database untuk menjaga konsistensi data apabila terdapat beberapa proses penyimpanan yang saling berkaitan.
+Namun, apabila terjadi kegagalan setelah proses penyimpanan berhasil dilakukan, terdapat kemungkinan data sudah tersimpan meskipun pengguna menerima respons gagal, misalnya jika kegagalan terjadi setelah transaksi selesai tetapi sebelum respons diterima pengguna.
+
+Fungsi `daftarPeserta()` menggunakan transaksi database dengan tingkat isolasi `Serializable` untuk menjaga konsistensi data. Jika terjadi kegagalan selama transaksi berlangsung, transaksi dapat dibatalkan sehingga perubahan tidak tersimpan. Dengan demikian, transaksi membantu mencegah ketidakkonsistenan data.
 
 ## 8. Kesimpulan
 
