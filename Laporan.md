@@ -158,7 +158,7 @@ Berdasarkan hasil pengujian melalui endpoint `/api/v1/auth/login`, sistem berhas
 
 **Gambar 10. Hasil Pengujian Login Admin**
 
-![Screenshot pengujian login Admin](bukti/10-pengujian-login-admin.png)
+![Screenshot pengujian login Admin](bukti/10-pengujian-login-admin.PNG)
 
 
 ## 4. Penjelasan Source Code
