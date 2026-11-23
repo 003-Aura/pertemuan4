@@ -77,9 +77,10 @@ Apabila proses berhasil, Prisma Client dapat digunakan oleh aplikasi backend unt
 
 ### 3.5 Menjalankan Migrasi Database
 
-Migrasi database dilakukan untuk menerapkan struktur tabel yang telah didefinisikan pada file schema Prisma ke dalam database MySQL.
+Migrasi database dilakukan untuk menerapkan struktur tabel yang telah didefinisikan pada file schema Prisma ke dalam database MySQL.Proses ini bertujuan agar tabel dan relasi yang dibutuhkan oleh aplikasi tersedia di dalam database. Berdasarkan pemeriksaan file `migration.sql`, proses migrasi menghasilkan tiga tabel utama, yaitu `User`, `Jadwal`, dan `Peserta`. Tabel `User` memiliki primary key `id` serta unique index pada kolom `nim` untuk mencegah penggunaan NIM yang sama. Tabel `Jadwal` digunakan untuk menyimpan informasi jadwal, kapasitas, dan waktu pembuatan. Sementara itu, tabel `Peserta` menghubungkan pengguna dengan jadwal melalui kolom `userId` dan `jadwalId`.
+Pada tabel `Peserta` terdapat unique index gabungan pada kolom `jadwalId` dan `userId` untuk mencegah pengguna mendaftar lebih dari satu kali pada jadwal yang sama. Selain itu, terdapat dua foreign key yang menghubungkan tabel `Peserta` dengan tabel `Jadwal` dan `User`. Kedua relasi tersebut menggunakan aturan `ON DELETE CASCADE` dan `ON UPDATE CASCADE`, sehingga perubahan atau penghapusan data pada tabel induk dapat diterapkan pada data yang berelasi sesuai aturan tersebut.
 
-Proses ini bertujuan agar tabel dan relasi yang dibutuhkan oleh aplikasi tersedia di dalam database.
+Dengan demikian, struktur tabel, primary key, unique index, dan foreign key pada file migration SQL telah menunjukkan relasi basis data yang sesuai dengan kebutuhan sistem.
 
 Perintah yang digunakan:
 
@@ -93,9 +94,11 @@ npm run db:deploy
 
 ### 3.6 Memasukkan Data Awal Menggunakan Seed
 
-Seed merupakan proses memasukkan data awal atau data contoh ke dalam database. Data tersebut digunakan untuk membantu proses pengujian aplikasi.
+Seed merupakan proses memasukkan data awal atau data contoh ke dalam database. Data tersebut digunakan untuk membantu proses pengujian aplikasi. Data awal dapat berupa akun pengguna, jadwal kegiatan, dan contoh pendaftaran peserta sesuai data yang tersedia pada project. 
+Pengujian seed dilakukan dengan mengubah nama pengguna dengan NIM `2026002` pada file `fixtures.json`, dari `Citra Contoh` menjadi `Citra Pengujian`. Setelah perubahan disimpan, perintah `npm run db:seed` dijalankan kembali dan proses seed berhasil diselesaikan.
+Berdasarkan pemeriksaan tabel `User` melalui phpMyAdmin, nama pengguna dengan NIM `2026002` tetap tercatat sebagai `Citra Contoh`, meskipun nama pada file fixture telah diubah menjadi `Citra Pengujian`. Hal ini terjadi karena mekanisme `upsert` pada program seed tidak memperbarui field yang sudah ada. Dengan demikian, data pengguna yang sebelumnya tersimpan tetap dipertahankan.
 
-Data awal dapat berupa akun pengguna, jadwal kegiatan, dan contoh pendaftaran peserta sesuai data yang tersedia pada project.
+Hasil pengujian menunjukkan bahwa proses seed tidak menimpa data pengguna yang sudah tersedia di database.
 
 Perintah yang digunakan:
 
@@ -144,10 +147,19 @@ Hasil yang diharapkan adalah status HTTP 200 dengan respons:
 ```
 
 Hasil tersebut menunjukkan bahwa API berjalan dengan baik dan dapat memberikan respons sesuai yang diharapkan.
+Pengujian login dilakukan untuk memastikan bahwa proses autentikasi pengguna dapat berjalan dengan baik. Pengujian dilakukan menggunakan akun Admin yang telah tersedia melalui proses seed, dengan NIM `2026001` dan password `admin123`.
+
+Berdasarkan hasil pengujian melalui endpoint `/api/v1/auth/login`, sistem berhasil memverifikasi kredensial pengguna dan memberikan token JWT sebagai bukti autentikasi berhasil. Dengan demikian, endpoint login telah berjalan sesuai dengan fungsinya.
+
 
 **Bukti health check:**
 
 ![Hasil Health Check](bukti/07-health-check.PNG)
+
+**Gambar 10. Hasil Pengujian Login Admin**
+
+![Screenshot pengujian login Admin](bukti/10-pengujian-login-admin.png)
+
 
 ## 4. Penjelasan Source Code
 
